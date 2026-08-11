@@ -1,0 +1,19 @@
+## .NET
+bin/
+obj/
+*.user
+
+## Rider / VS
+.vs/
+.idea/
+*.suo
+
+## App runtime state (created on first run; not source)
+src/DeviceControlCore/state/
+src/DeviceControlCore/logs/
+src/DeviceControlCore/audit/
+src/DeviceControlCore/packages/
+
+## Test results
+TestResults/
+*.trx
