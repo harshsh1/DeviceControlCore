@@ -21,6 +21,6 @@ namespace DeviceControlCore.Options
 
 		public required string OsSettingsStateFilePath { get; init; }
 
-		public required string AuditLogFilePath { get; init; }
+		public required string AuditLogPath { get; init; }
 	}
 }

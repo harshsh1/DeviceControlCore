@@ -10,9 +10,10 @@ public sealed class StateService : IStateService
 		[SystemState.Idle] = [SystemState.Running, SystemState.Updating, SystemState.Maintenance],
 		[SystemState.Running] = [SystemState.Idle, SystemState.Updating, SystemState.Maintenance],
 		[SystemState.Updating] = [SystemState.Idle, SystemState.Maintenance, SystemState.Error],
-		[SystemState.Maintenance] = [SystemState.Idle],
-		[SystemState.Error] = [SystemState.Idle],
+		[SystemState.Maintenance] = [SystemState.Idle, SystemState.Running],
+		[SystemState.Error] = [SystemState.Idle, SystemState.Running],
 	};
+
 
 	private readonly ILogger<StateService> _logger;
 	private readonly object _gate = new();
