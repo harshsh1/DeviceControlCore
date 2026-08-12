@@ -207,15 +207,20 @@ public sealed class ConsoleHostedService : BackgroundService
 
 	private async Task HandleStopAsync()
 	{
-		if (_workerTask is null)
+		var currentState = _stateService.CurrentState;
+
+		if (currentState != SystemState.Running && currentState != SystemState.Maintenance)
 		{
-			_logger.LogWarning("No worker loop is running.");
+			_logger.LogWarning("Nothing to stop; system is already {State}.", currentState);
 			return;
 		}
 
 		await StopWorkerLoopAsync();
-		_stateService.TryTransitionTo(SystemState.Idle, "stop command");
-		_logger.LogInformation("Worker loop stopped; system is idle.");
+
+		if (_stateService.TryTransitionTo(SystemState.Idle, "stop command"))
+		{
+			_logger.LogInformation("Worker loop stopped; system is idle.");
+		}
 	}
 
 	private async Task HandleSignalAsync(string signalName)
