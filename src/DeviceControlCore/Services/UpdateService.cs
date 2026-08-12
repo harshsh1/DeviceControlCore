@@ -160,7 +160,7 @@ public sealed class UpdateService : IUpdateService
 		using var timeoutCts = new CancellationTokenSource(TimeSpan.FromSeconds(_options.PreInstallScriptTimeoutSeconds));
 		using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeoutCts.Token);
 
-		return await _scriptRunner.RunAsync(scriptPath, packageDirectory, linkedCts.Token);
+		return await _scriptRunner.RunAsync(Path.GetFullPath(scriptPath), Path.GetFullPath(packageDirectory), linkedCts.Token);
 	}
 
 	private VersionState LoadVersionState()

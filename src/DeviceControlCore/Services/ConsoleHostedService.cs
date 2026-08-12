@@ -162,6 +162,14 @@ public sealed class ConsoleHostedService : BackgroundService
 		{
 			while (!token.IsCancellationRequested)
 			{
+				if (_stateService.CurrentState != SystemState.Running)
+				{
+					_logger.LogInformation(
+						"Worker loop detected state left Running ({State}); halting.",
+						_stateService.CurrentState);
+					break;
+				}
+
 				_logger.LogDebug("Worker loop tick (state: {State})", _stateService.CurrentState);
 				await Task.Delay(TimeSpan.FromSeconds(5), token);
 			}
@@ -241,6 +249,8 @@ public sealed class ConsoleHostedService : BackgroundService
 			_logger.LogWarning("Usage: update --package <path>");
 			return;
 		}
+
+		await StopWorkerLoopAsync();
 
 		var result = await _updateService.InstallAsync(parts[packageIndex + 1], cancellationToken);
 
