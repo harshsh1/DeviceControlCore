@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DeviceControlCore.Options
 {
-	public sealed class ServiceOptions
+	public class ServiceOptions
 	{
 		public const string SectionName = "DeviceControl";
 

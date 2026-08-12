@@ -9,6 +9,10 @@ obj/
 *.suo
 
 ## App runtime state (created on first run; not source)
+/state/
+/logs/
+/audit/
+/packages/
 src/DeviceControlCore/state/
 src/DeviceControlCore/logs/
 src/DeviceControlCore/audit/

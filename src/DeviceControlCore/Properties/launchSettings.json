@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DeviceControlCore": {
+      "commandName": "Project",
+      "workingDirectory": "..\\.."
+    }
+  }
+}
